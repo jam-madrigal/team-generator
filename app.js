@@ -70,8 +70,7 @@ inquirer.prompt(prompts.manager)
         );
 
         memberObjectArray.push(manager);
-        // remove console log later
-        console.log(memberObjectArray);
+
         nextMember();
     });
 
