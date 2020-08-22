@@ -7,50 +7,62 @@ const fs = require("fs");
 
 // Importing the prompts I created
 const prompts = require("./prompts");
-
+                
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 memberObjectArray = [];
 
 const render = require("./lib/htmlRenderer");
-const { ADDRGETNETWORKPARAMS } = require("dns");
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 function nextMember() {
-    inquirer.prompt(prompts.addNext);
-    if (prompts.addNext.choices === "Engineer") {
+    inquirer.prompt(prompts.addNext).then((response) => {
+    
+    if (response === "Engineer") {
         inquirer.prompt(prompts.engineer)
         .then((response) => {
             let engineer = new Engineer (
+                response.engineerName,
+                response.engineerId,
+                response.engineerEmail,
+                response.engineerGithub,
+            );
 
-            )
             memberObjectArray.push(engineer);
             // remove console log later
             console.log(memberObjectArray);
-            nextMember()
+            nextMember();
         })
     }
 
-    else if (prompts.addNext.choices === "Intern") {
+    else if (response === "Intern") {
         inquirer.prompt(prompts.intern)
         .then((response) => {
             let intern = new Intern (
+                response.internName,
+                response.internId,
+                response.internEmail,
+                response.internSchool,
+            );
 
-            )
             memberObjectArray.push(intern);
             // remove console log later
             console.log(memberObjectArray);
-            nextMember()
+            nextMember();
         })
     }
 
     else {
-        // render function goes here, taking in the memberObjectArray
+        // Render function goes here, creating an output after the prompts are exited
+        generateTeam();
         return "Team successfully generated.";
     };
+})
 };
 
+// Prompt that takes in responses and adds a new manager class to an array that stores all the team members
 inquirer.prompt(prompts.manager)
     .then((response) => {
         let manager = new Manager (
@@ -65,6 +77,14 @@ inquirer.prompt(prompts.manager)
         console.log(memberObjectArray);
         nextMember();
     });
+
+    // Function that generates the team from the memberObjectArray
+    function generateTeam() {
+        fs.writeFile(outputPath, render(memberObjectArray), function(err) {
+            if (err)
+                throw err;
+        });
+    }
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

@@ -25,7 +25,7 @@ const prompts = {
     // Prompts to select what to add next, or to quit the application and render the team
     addNext: {
         type: "list",
-        message: "Select a new type of team memnber to add, or exit and render the team.",
+        message: "Select a new type of team member to add, or exit and render the team.",
         name: "addNext",
         choices: [
             "Engineer",
