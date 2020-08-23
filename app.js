@@ -70,7 +70,6 @@ inquirer.prompt(prompts.manager)
         );
 
         memberObjectArray.push(manager);
-
         nextMember();
     });
 
