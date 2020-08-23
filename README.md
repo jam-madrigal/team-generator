@@ -1,5 +1,5 @@
 
-![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)(https://opensource.org/licenses/EPL-1.0)
+![License](https://img.shields.io/badge/License-EPL%201.0-red.svg)
 # Team Generator
 ---
 
@@ -15,7 +15,7 @@
 
 # Description
 This is a cli application that you can use to generate html displaying a team of developers based on user input.
-![Demo Video](https://github.com/jam-madrigal/team-generator/blob/master/assets/teamgeneratorvideo.mp4)
+![Demo Video](https://github.com/jam-madrigal/team-generator/blob/master/assets/teamgeneratorgif.gif?raw=true)
 
 
 # Usage
